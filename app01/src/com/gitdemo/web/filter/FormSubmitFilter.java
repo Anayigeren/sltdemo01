@@ -18,6 +18,7 @@ public class FormSubmitFilter implements Filter {
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
         } else {
             //放行
+            System.out.println("===========请求通过===========");
             chain.doFilter(req, resp);
         }
     }
