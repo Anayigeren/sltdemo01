@@ -10,10 +10,16 @@ public class FormSubmitFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        System.out.println("FormSubmitFilter执行了....");
-
-        //放行
-        chain.doFilter(req, resp);
+        // 修改bug
+        System.out.println("==============拦截请求================");
+        String username = (String) req.getParameter("username");
+        if (username == null) {
+            System.out.println("被拦截：跳转到login页面！");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        } else {
+            //放行
+            chain.doFilter(req, resp);
+        }
     }
 
     public void init(FilterConfig config) throws ServletException {
